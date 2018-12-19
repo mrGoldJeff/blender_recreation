@@ -1,0 +1,11 @@
+import bpy
+
+amount = 4
+
+for idn in range (amount):
+
+    x = idn % pow(amount, 1/2)
+
+    y = idn // pow(amount, 1/2)
+
+    bpy.ops.mesh.primitive_monkey_add(radius=0.2, location=(x,y,1))
