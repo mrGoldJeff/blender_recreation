@@ -1,0 +1,30 @@
+import bpy
+from bpy.types import Panel
+
+class SimpleCreat(Panel):
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'TOOLS'
+    bl_label = 'Tools Tab Label'
+    bl_context = 'objectmode'
+    bl_category = 'ReCreation'
+    
+    def draw (self, context):
+        layout = self.layout
+        layout.operator('mesh.primitive_cube_add', text='Add new cube')
+        layout.operator(execute, text='Add 16 monkeys')
+        
+    def execute(self, context): 
+        scene = context.scene
+        for idn in range (16):
+            x=idn % 4
+            y = idn // 4
+            bpy.ops.mesh.primitive_monkey_add(radius=0.2, location=(x,y,1))
+        
+def register():
+    bpy.utils.register_class(SimpleCreat)
+    
+def unregister():
+    bpy.utils.unregister_class(SimpleCreat)
+    
+if __name__ == '__main__':
+    register()
