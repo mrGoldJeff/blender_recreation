@@ -1,0 +1,43 @@
+bl_info = {
+
+"name": "Create x monkeys",
+
+"category": "Object",
+
+}
+
+import bpy
+
+class CreateXObjetcs(bpy.types.Operator):
+
+"""My Object Creating Script""" # blender will use this as a tooltip for menu items and buttons.
+
+bl_idname = "object.create_x_obj" # unique identifier for buttons and menu items to reference.
+
+bl_label = "Create X Monkeys" # display name in the interface.
+
+bl_options = {'REGISTER', 'UNDO'} # enable undo for the operator.
+
+def execute(self, context): # execute() is called by blender when running the operator.
+
+# The original script
+
+scene = context.scene
+
+for idn in range (16):
+
+x=idn % 4
+
+y = idn // 4
+
+bpy.ops.mesh.primitive_monkey_add(radius=0.2, location=(x,y,1))
+
+return {'FINISHED'} # this lets blender know the operator finished successfully.
+
+def register():
+
+bpy.utils.register_class(CreateXObjetcs)
+
+def unregister():
+
+bpy.utils.unregister_class(CreateXObjetcs)
